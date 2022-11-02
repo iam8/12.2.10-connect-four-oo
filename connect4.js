@@ -21,6 +21,9 @@ class Game {
         this.colorKey = {1: "blue", 2: "red"};
 
         this.board = []; // Array of rows. Each row is an array of cells: board[y][x]
+
+        this.makeBoard();
+        this.makeHtmlBoard();
     }
 
     /** makeBoard: create in-JS board structure:
