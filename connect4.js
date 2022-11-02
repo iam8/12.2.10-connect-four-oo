@@ -38,7 +38,6 @@ class Game {
     /** makeHtmlBoard: make HTML table and row of column tops. */
     makeHtmlBoard() {
         const board = document.getElementById('board');
-        console.log("In makeHTMLboard", this);
 
         // make column tops (clickable area for adding a piece to that column)
         const top = document.createElement('tr');
@@ -98,8 +97,6 @@ class Game {
     /** handleClick: handle click of column top to play piece */
     handleClick(evt) {
 
-        console.log(this);
-
         // get x from ID of clicked cell
         const x = +evt.target.id;
 
@@ -129,12 +126,10 @@ class Game {
 
     /** checkForWin: check board cell-by-cell for "does a win start here?" */
     checkForWin() {
-        console.log("Inside checkForWin", this);
         const _win = (cells) => {
         // Check four cells to see if they're all color of current player
         //  - cells: list of four (y, x) cells
         //  - returns true if all are legal coordinates & all match currPlayer
-            console.log("Inside _win:", this); // this is undefined
             return cells.every(
             ([y, x]) =>
                 y >= 0 &&
