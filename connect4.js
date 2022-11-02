@@ -14,6 +14,8 @@ class Game {
 
     constructor(height=6, width=7) {
 
+        this.isGameActive = false;
+
         this.HEIGHT = height;
         this.WIDTH = width;
 
@@ -24,6 +26,7 @@ class Game {
 
         this.makeBoard();
         this.makeHtmlBoard();
+        this.makeResetButton();
     }
 
     /** makeBoard: Create in-JS board structure:
@@ -69,6 +72,38 @@ class Game {
         }
     }
 
+    /** makeResetButton: Create a button that will start and reset the game board on click. */
+    makeResetButton() {
+
+        const btnContainer = document.querySelector("#reset-btn-div");
+
+        const resetBtn = document.createElement("button");
+        resetBtn.id = "reset-button";
+        resetBtn.innerText = "Start game";
+        resetBtn.addEventListener("click", this.resetGame.bind(this));
+
+        btnContainer.append(resetBtn);
+    }
+
+    /** resetGame: Reset the game board to its initial state. */
+    resetGame(event) {
+
+        const resetBtn = document.querySelector("#reset-button");
+
+        // Start the game if it's not active
+        if (!this.isGameActive) {
+            this.isGameActive = true;
+            resetBtn.innerText = "Reset game";
+        }
+
+        else {
+            
+        }
+
+        // this.isGameActive = true;
+        // new Game(this.HEIGHT, this.WIDTH);
+    }
+
     /** findSpotForCol: Given column x, return top empty y (null if filled). */
     findSpotForCol(x) {
 
@@ -99,8 +134,12 @@ class Game {
         alert(msg);
     }
 
-    /** handleClick: Handle click of column top to play piece. */
+    /** handleClick: Handle click of column top to play piece. Ignore clicks if game is not active.*/
     handleClick(evt) {
+
+        if (!this.isGameActive) {
+            return;
+        }
 
         // Get x from ID of clicked cell
         const x = +evt.target.id;
@@ -117,11 +156,13 @@ class Game {
 
         // Check for win
         if (this.checkForWin()) {
+            this.isGameActive = false;
             return this.endGame(`Player ${this.currPlayer} won!`);
         }
 
         // Check for tie
         if (this.board.every(row => row.every(cell => cell))) {
+            this.isGameActive = false;
             return this.endGame('Tie!');
         }
 
@@ -164,4 +205,4 @@ class Game {
     }
 }
 
-const game1 = new Game(6, 7);
+new Game(6, 7);
