@@ -186,11 +186,11 @@ const resetBtn = document.querySelector("#reset-button");
 const colorInput1 = document.querySelector("#color1");
 const colorInput2 = document.querySelector("#color2");
 
-resetBtn.addEventListener("click", () => {
+resetBtn.addEventListener("click", (event) => {
+
+    event.preventDefault();
+
     const p1 = new Player(colorInput1.value);
     const p2 = new Player(colorInput2.value);
     new Game(6, 7, p1, p2);
-
-    colorInput1.value = "";
-    colorInput2.value = "";
 })
