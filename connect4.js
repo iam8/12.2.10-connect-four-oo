@@ -12,15 +12,15 @@
 /** Class representing a game of Connect Four. */
 class Game {
 
-    constructor(height=6, width=7) {
+    constructor(height, width, player1, player2) {
 
         this.isGameActive = true;
 
         this.HEIGHT = height;
         this.WIDTH = width;
 
-        this.currPlayer = 1; // Active player: 1 or 2
-        this.colorKey = {1: "red", 2: "blue"};
+        this.players = [player1, player2];
+        this.currPlayer = player1; // Active player: 1 or 2
 
         this.board = []; // Array of rows. Each row is an array of cells: board[y][x]
 
@@ -89,8 +89,8 @@ class Game {
 
         const piece = document.createElement('div');
         piece.classList.add('piece');
-        piece.classList.add(`p${this.currPlayer}`);
         piece.style.top = -50 * (y + 2);
+        piece.style.backgroundColor = this.currPlayer.color;
 
         const spot = document.getElementById(`${y}-${x}`);
         spot.append(piece);
@@ -119,13 +119,13 @@ class Game {
         }
 
         // Place piece in board and add to HTML table
-        this.board[y][x] = this.currPlayer;
+        this.board[y][x] = this.currPlayer.color;
         this.placeInTable(y, x);
 
         // Check for win
         if (this.checkForWin()) {
             this.isGameActive = false;
-            return this.endGame(`Player ${this.colorKey[this.currPlayer]} won!`);
+            return this.endGame(`Player ${this.currPlayer.color} won!`);
         }
 
         // Check for tie
@@ -135,7 +135,8 @@ class Game {
         }
 
         // Switch players
-        this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+        // this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+        this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
     }
 
     /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -173,9 +174,19 @@ class Game {
     }
 }
 
+/** Class Player: Represents a Connect Four game player. */
+class Player {
+
+    constructor(color) {
+        this.color = color;
+    }
+}
+
 // Handling clicks to the start/reset game button
 const resetBtn = document.querySelector("#reset-button");
 
 resetBtn.addEventListener("click", () => {
-    new Game(6, 7);
+    const p1 = new Player("purple");
+    const p2 = new Player("yellow");
+    new Game(6, 7, p1, p2);
 })
