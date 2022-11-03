@@ -14,7 +14,7 @@ class Game {
 
     constructor(height=6, width=7) {
 
-        this.isGameActive = false;
+        this.isGameActive = true;
 
         this.HEIGHT = height;
         this.WIDTH = width;
@@ -26,7 +26,6 @@ class Game {
 
         this.makeBoard();
         this.makeHtmlBoard();
-        this.makeResetButton();
     }
 
     /** makeBoard: Create in-JS board structure:
@@ -43,6 +42,7 @@ class Game {
     makeHtmlBoard() {
 
         const board = document.getElementById('board');
+        board.innerHTML = "";
 
         // Make column tops (clickable area for adding a piece to that column)
         const top = document.createElement('tr');
@@ -73,39 +73,18 @@ class Game {
     }
 
     /** makeResetButton: Create a button that will start and reset the game board on click. */
-    makeResetButton() {
+    // makeResetButton() {
 
-        const btnContainer = document.querySelector("#reset-btn-div");
+    //     const btnContainer = document.querySelector("#reset-btn-div");
 
-        const resetBtn = document.createElement("button");
-        resetBtn.id = "reset-button";
-        resetBtn.className = "start-game";
-        resetBtn.innerText = "Start game";
-        resetBtn.addEventListener("click", this.resetGame.bind(this));
+    //     const resetBtn = document.createElement("button");
+    //     resetBtn.id = "reset-button";
+    //     resetBtn.className = "start-game";
+    //     resetBtn.innerText = "Start game";
+    //     // resetBtn.addEventListener("click", this.resetGame.bind(this));
 
-        btnContainer.append(resetBtn);
-    }
-
-    /** resetGame: Reset the game board to its initial state. */
-    resetGame(event) {
-
-        const resetBtn = document.querySelector("#reset-button");
-
-        // Start the game if it's not active yet
-        if (!this.isGameActive && resetBtn.className === "start-game") {
-            this.isGameActive = true;
-            resetBtn.className = "reset-game";
-            resetBtn.innerText = "Reset game";
-        }
-
-        // Otherwise, reset game board to initial state
-        else {
-            
-        }
-
-        // this.isGameActive = true;
-        // new Game(this.HEIGHT, this.WIDTH);
-    }
+    //     btnContainer.append(resetBtn);
+    // }
 
     /** findSpotForCol: Given column x, return top empty y (null if filled). */
     findSpotForCol(x) {
@@ -160,7 +139,7 @@ class Game {
         // Check for win
         if (this.checkForWin()) {
             this.isGameActive = false;
-            return this.endGame(`Player ${this.currPlayer} won!`);
+            return this.endGame(`Player ${this.colorKey[this.currPlayer]} won!`);
         }
 
         // Check for tie
@@ -208,4 +187,9 @@ class Game {
     }
 }
 
-new Game(6, 7);
+// Handling clicks to the start/reset game button
+const resetBtn = document.querySelector("#reset-button");
+
+resetBtn.addEventListener("click", () => {
+    new Game(6, 7);
+})
