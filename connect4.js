@@ -20,7 +20,7 @@ class Game {
         this.WIDTH = width;
 
         this.players = [player1, player2];
-        this.currPlayer = player1; // Active player: 1 or 2
+        this.currPlayer = player1; // Active player
 
         this.board = []; // Array of rows. Each row is an array of cells: board[y][x]
 
@@ -119,7 +119,7 @@ class Game {
         }
 
         // Place piece in board and add to HTML table
-        this.board[y][x] = this.currPlayer.color;
+        this.board[y][x] = this.currPlayer;
         this.placeInTable(y, x);
 
         // Check for win
@@ -135,7 +135,6 @@ class Game {
         }
 
         // Switch players
-        // this.currPlayer = this.currPlayer === 1 ? 2 : 1;
         this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
     }
 
