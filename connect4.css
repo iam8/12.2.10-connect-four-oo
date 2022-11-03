@@ -33,3 +33,11 @@
 #column-top td:hover {
     background-color: gold;
 }
+
+/* #reset-btn-div {
+    background-color: lightgreen;
+} */
+
+#reset-button {
+    height: 30px;
+}
