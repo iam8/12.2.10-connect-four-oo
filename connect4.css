@@ -2,23 +2,46 @@
 /* 10/27/22 */
 /* Exercise 12.2.10: Connect Four OO */
 
-/* game board table */
-#board td {
-    width: 50px;
-    height: 50px;
-    border: solid 1px #666;
+body {
+    background-image: linear-gradient(red, yellow);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+label {
+    display: block;
+    text-align: center;
+}
+
+input, button {
+    display: block;
+    margin: 5px auto 20px auto;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
 .piece {
-    margin: 5px;
+    margin: auto;
     width: 80%;
     height: 80%;
     border-radius: 50%;
 }
 
+/* The entire game board */
+#board {
+    margin: 20px auto;
+}
+
+/* game board table cells */
+#board td {
+    background-color: linen;
+    width: 50px;
+    height: 50px;
+    border: solid 1px #666;
+}
+
 /* column-top is table row of clickable areas for each column */
 #column-top td {
+    background-color: tan;
     border: dashed 1px lightgray;
 }
 
