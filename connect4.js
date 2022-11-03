@@ -12,15 +12,15 @@
 /** Class representing a game of Connect Four. */
 class Game {
 
-    constructor(height, width, player1, player2) {
+    constructor(player1, player2, height=6, width=7) {
 
         this.isGameActive = true;
 
-        this.HEIGHT = height;
-        this.WIDTH = width;
-
         this.players = [player1, player2];
         this.currPlayer = player1; // Active player
+
+        this.HEIGHT = height;
+        this.WIDTH = width;
 
         this.board = []; // Array of rows. Each row is an array of cells: board[y][x]
 
@@ -33,6 +33,7 @@ class Game {
      */
     makeBoard() {
 
+        this.board = [];
         for (let y = 0; y < this.HEIGHT; y++) {
             this.board.push(Array.from({ length: this.WIDTH }));
         }
@@ -125,7 +126,7 @@ class Game {
         // Check for win
         if (this.checkForWin()) {
             this.isGameActive = false;
-            return this.endGame(`Player ${this.currPlayer.color} won!`);
+            return this.endGame(`The player with color ${this.currPlayer.color} won!`);
         }
 
         // Check for tie
@@ -192,5 +193,5 @@ resetBtn.addEventListener("click", (event) => {
 
     const p1 = new Player(colorInput1.value);
     const p2 = new Player(colorInput2.value);
-    new Game(6, 7, p1, p2);
+    new Game(p1, p2);
 })
