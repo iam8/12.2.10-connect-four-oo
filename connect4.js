@@ -79,6 +79,7 @@ class Game {
 
         const resetBtn = document.createElement("button");
         resetBtn.id = "reset-button";
+        resetBtn.className = "start-game";
         resetBtn.innerText = "Start game";
         resetBtn.addEventListener("click", this.resetGame.bind(this));
 
@@ -90,12 +91,14 @@ class Game {
 
         const resetBtn = document.querySelector("#reset-button");
 
-        // Start the game if it's not active
-        if (!this.isGameActive) {
+        // Start the game if it's not active yet
+        if (!this.isGameActive && resetBtn.className === "start-game") {
             this.isGameActive = true;
+            resetBtn.className = "reset-game";
             resetBtn.innerText = "Reset game";
         }
 
+        // Otherwise, reset game board to initial state
         else {
             
         }
