@@ -181,11 +181,16 @@ class Player {
     }
 }
 
-// Handling clicks to the start/reset game button
+// Handling clicks to the start/reset game button and retrieving color inputs
 const resetBtn = document.querySelector("#reset-button");
+const colorInput1 = document.querySelector("#color1");
+const colorInput2 = document.querySelector("#color2");
 
 resetBtn.addEventListener("click", () => {
-    const p1 = new Player("purple");
-    const p2 = new Player("yellow");
+    const p1 = new Player(colorInput1.value);
+    const p2 = new Player(colorInput2.value);
     new Game(6, 7, p1, p2);
+
+    colorInput1.value = "";
+    colorInput2.value = "";
 })
