@@ -20,7 +20,7 @@ class Game {
         this.WIDTH = width;
 
         this.currPlayer = 1; // Active player: 1 or 2
-        this.colorKey = {1: "blue", 2: "red"};
+        this.colorKey = {1: "red", 2: "blue"};
 
         this.board = []; // Array of rows. Each row is an array of cells: board[y][x]
 
@@ -71,20 +71,6 @@ class Game {
 
         }
     }
-
-    /** makeResetButton: Create a button that will start and reset the game board on click. */
-    // makeResetButton() {
-
-    //     const btnContainer = document.querySelector("#reset-btn-div");
-
-    //     const resetBtn = document.createElement("button");
-    //     resetBtn.id = "reset-button";
-    //     resetBtn.className = "start-game";
-    //     resetBtn.innerText = "Start game";
-    //     // resetBtn.addEventListener("click", this.resetGame.bind(this));
-
-    //     btnContainer.append(resetBtn);
-    // }
 
     /** findSpotForCol: Given column x, return top empty y (null if filled). */
     findSpotForCol(x) {
